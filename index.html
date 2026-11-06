@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'; script-src 'self'; img-src 'self'; font-src 'self'; connect-src 'self'; manifest-src 'self'; base-uri 'none'; form-action 'none'">
+  <meta name="referrer" content="no-referrer">
+  <title>SOLNCE INVEST: инвестиционный калькулятор</title>
+  <meta name="description" content="Пример условий частного финансирования: сумма, выплаты и расчётная доходность за 36 месяцев.">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#1A1A1A">
+  <meta name="color-scheme" content="dark">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="SOLNCE INVEST">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="preload" href="manrope.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="app">
+    <header class="top">
+      <div>
+        <h1 class="brand">SOLNCE INVEST</h1>
+        <p class="brand-sub">Инвестиционный калькулятор</p>
+      </div>
+      <img class="mark" src="mark.png" width="32" height="32" alt="Солнце Дизайн">
+    </header>
+
+    <section class="card amount" aria-labelledby="amount-label">
+      <label id="amount-label" class="label" for="amount-input">Сумма инвестиций</label>
+      <div class="amount-field">
+        <span class="amount-sizer">
+          <span id="amount-ghost" class="amount-ghost" aria-hidden="true">5 000 000</span>
+          <input id="amount-input" class="amount-input" type="text" inputmode="numeric" autocomplete="off" enterkeyhint="done" aria-describedby="amount-hint" value="5 000 000">
+        </span>
+        <span class="amount-cur" aria-hidden="true">₽</span>
+      </div>
+      <input id="slider" class="slider" type="range" min="500000" max="15000000" step="100000" value="5000000" aria-label="Сумма инвестиций, ползунок">
+      <p id="amount-hint" class="hint" aria-live="polite">Вручную: от 500 000 до 15 000 000 ₽</p>
+      <div id="chips" class="chips" role="group" aria-label="Быстрый выбор суммы"></div>
+    </section>
+
+    <section class="results" aria-label="Результат расчёта">
+      <div class="card result result-income">
+        <p class="label">Ваш доход</p>
+        <p id="income" class="result-value accent"></p>
+        <p class="result-note">за 36 месяцев, расчётно</p>
+      </div>
+      <div class="card result">
+        <p class="label">Всего получите</p>
+        <p id="total" class="result-value"></p>
+        <p class="result-note">вложение и доход</p>
+      </div>
+    </section>
+
+    <section class="card schedule" aria-labelledby="schedule-title">
+      <h2 id="schedule-title" class="title">График ежемесячных выплат</h2>
+      <div id="periods" class="periods"></div>
+    </section>
+
+    <section class="card chart-card" aria-labelledby="chart-title">
+      <h2 id="chart-title" class="title">Выплаты по всем 36 месяцам</h2>
+      <p id="chart-readout" class="readout" aria-live="polite"></p>
+      <div id="chart" class="chart" tabindex="0" role="img"></div>
+      <div id="chart-axis" class="axis" aria-hidden="true"></div>
+    </section>
+
+    <section class="card metrics" aria-label="Показатели доходности">
+      <dl class="metric-list">
+        <div class="metric">
+          <dt>Первоначальное вложение</dt>
+          <dd id="metric-amount"></dd>
+        </div>
+        <div class="metric">
+          <dt>Совокупная доходность</dt>
+          <dd>+70% за 36 месяцев</dd>
+          <p class="metric-note">За весь срок, а не в год.</p>
+        </div>
+        <div class="metric">
+          <dt>Эффективная годовая доходность (XIRR)</dt>
+          <dd id="metric-xirr"></dd>
+          <p id="metric-xirr-note" class="metric-note"></p>
+        </div>
+      </dl>
+    </section>
+
+    <section class="actions" aria-label="Действия">
+      <button id="share" class="btn btn-primary" type="button">Поделиться расчётом</button>
+      <button id="copy" class="btn btn-secondary" type="button">Скопировать расчёт</button>
+    </section>
+
+    <footer class="legal">
+      <p>Расчёт показывает пример условий частного финансирования. Это не банковский вклад: средства не застрахованы системой страхования вкладов, а доход не гарантирован. Возможна потеря вложенных средств. Страница не является публичной офертой или индивидуальной инвестиционной рекомендацией. Условия определяются только подписанным договором.</p>
+      <p>Все вычисления выполняются на вашем устройстве. Данные не сохраняются и никуда не передаются.</p>
+    </footer>
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="calc.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
